@@ -19,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResources([
+    '/foos' => \App\Http\Controllers\Api\v1\Foo\FoosController::class,
     '/players' => \App\Http\Controllers\Api\v1\Player\PlayersController::class,
 ]);
