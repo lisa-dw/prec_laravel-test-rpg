@@ -16,7 +16,8 @@ class FoosController extends Controller
      * @param  \App\Models\Foo\Foo  $foo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Foo $foo)
+    public function destroy(Foo $foo)   // = delete. (삭제)
+
     {
         Log::info(__METHOD__);
 
@@ -30,14 +31,18 @@ class FoosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index()                // = (목록으로 보여주는 것)
     {
-        Log::info(__METHOD__);
 
-        $outs = Foo::all();
+        $outs = Foo::all(); // Foo 테이블의 전체를 보여달라.
 
-        //return json_encode($outs);
-        return response()->json($outs, Response::HTTP_OK, [], JSON_PRETTY_PRINT);
+        //$outs = Foo::whereTitle('bar'); // Foo 테이블에서 bar 컬럼의 내용을 보여줘라.
+
+        // $outs = Foo::where('title', "=", 'bar')->get(); (위 코드랑 같은 것)
+        // $outs = Foo::pluck('id'); // Foo 테이블 전체 중에 'id'의
+
+        return ($outs);
+
     }
 
     /**
@@ -46,7 +51,7 @@ class FoosController extends Controller
      * @param  \App\Models\Foo\Foo  $foo
      * @return \Illuminate\Http\Response
      */
-    public function show(Foo $foo)
+    public function show(Foo $foo)          // = (항목으로 보여주는 것)
     {
         //
     }
@@ -57,7 +62,7 @@ class FoosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request)     // = Create (테이블 생성)
     {
         Log::info(__METHOD__);
 
@@ -74,7 +79,7 @@ class FoosController extends Controller
      * @param  \App\Models\Foo\Foo  $foo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Foo $foo)
+    public function update(Request $request, Foo $foo)  // = ( 수정 )
     {
         Log::info(__METHOD__);
 
