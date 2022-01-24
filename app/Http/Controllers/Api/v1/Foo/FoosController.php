@@ -19,12 +19,16 @@ class FoosController extends Controller
     public function destroy(Foo $foo)   // = delete. (삭제)
 
     {
-        Log::info(__METHOD__);
+        //Log::info(__METHOD__);
 
         $outs = $foo->delete();
 
         return json_encode($outs);
     }
+
+
+
+
 
     /**
      * Display a listing of the resource.
@@ -55,8 +59,13 @@ class FoosController extends Controller
      */
     public function show(Foo $foo)          // = (항목으로 보여주는 것)
     {
-     //   return $foo; // 반드시 리턴을 해줘야 show함수가 실행되고, 항목이 출력됨.
+         return $foo;           // 반드시 리턴을 해줘야 show함수가 실행되고, 항목이 출력됨.
+
     }
+
+
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -67,14 +76,15 @@ class FoosController extends Controller
     public function store(Request $request)     // = Create (테이블 생성)
     {
         Log::info(__METHOD__);  // store에 요청이 왔어. //
-        Log::info($request);  // request 가 어떻게 왔어.              // 라우터에
+        Log::info($request);  // request 가 어떻게 왔어.              // 라우터에 컨트롤러를 연결하여 로그로 찍어볼 수 있으면, 혼자서 시작할 수 있다.
         // 콘솔을 사용하면, 요청이 안되는 것은 잡을 수 없지만, 요청이 되는 것을 확인하면 그 때부터 잡을 수 있다.
         //Log::info();  / Log 클래스에 info() 함수를 바로 사용하는 것.(new로 생성하지 않고)
+
 
         // 저장하는 방법
 
         $outs = Foo::create($request->all());   // 묶어서 요청하는 것. / Foo 테이블에 리퀘스트를 통째로 저장해! 라고 하는 것.
-
+                                                // => 모델명::create(안에 배열로 키 값으로)
         return $outs;
 
         // 저장하는 다른 방법들
@@ -83,7 +93,7 @@ class FoosController extends Controller
 //                ]) ;
 //
 //             Foo::create([
-//                    'title' => $request->title,     // Foo 테이블에 요청을 넣는 것.
+//                    'title' => $request->title,     // Foo 테이블에 요청을 넣는 것. // ##보통은 이렇게 저장한다.
 //                ]);
 
 
@@ -95,13 +105,6 @@ class FoosController extends Controller
         $outs = Foo::create($request->all()); // 테이블 Foo에 request를 전부 다 통째로 저장하라는 것을 변수 outs에 지정해놓음
 
         return $outs;
-
-
-
-
-
-
-
 
 
         // ## 에러가 났을 때.
@@ -124,10 +127,10 @@ class FoosController extends Controller
      */
     public function update(Request $request, Foo $foo)  // = ( 수정 )
     {
-        Log::info(__METHOD__);
+        Log::info($request);
 
-        $outs = $foo->update($request->all());
+        $outs = $foo->update($request->all()); // up
 
-        return json_encode($outs);
+        return $outs;
     }
 }
